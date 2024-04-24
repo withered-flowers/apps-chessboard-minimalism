@@ -7,7 +7,11 @@ const ChessboardChess = () => {
 
 	const whichColorMove = () => {
 		const fenArr = fen.split(" ");
-		return !game.isGameOver() ? (fenArr[1] === "w" ? "White" : "Black") : "-";
+		return !game.isGameOver()
+			? fenArr[1] === "w" || fenArr[0] === "start"
+				? "White"
+				: "Black"
+			: "-";
 	};
 
 	const onDrop = ({

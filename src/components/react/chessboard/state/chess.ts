@@ -17,13 +17,8 @@ interface ChessState {
 const useChessStore = create<ChessState>()((set) => ({
 	gameId: "",
 	game: new ChessLogic(),
-	fen: "rn1qkbnr/pp2pppp/3p4/1Pp5/6b1/4PP2/P1PP2PP/RNBQKBNR w KQkq - 1 5",
-	pgn: `
-		[White "Si A"]
-		[Black "Si B"]
-
-		1. b4 c6 2. b5 c5 3. e3 d6 4. f3 Bg4
-	`,
+	fen: "start",
+	pgn: "",
 
 	/*
 	--- For Debug Purpose
