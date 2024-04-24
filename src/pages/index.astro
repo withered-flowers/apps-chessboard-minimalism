@@ -1,16 +1,24 @@
 ---
+import ChessboardPlaceholder from "../components/react/chessboard/placeholder";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { newGame } from "../logics/chess/index";
 
+const currentState = newGame();
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout>
+	<section
+		class="min-w-full min-h-dvh flex flex-col gap-4 items-center justify-center bg-slate-50 text-slate-700"
+	>
+		<p class="text-3xl">Welcome to Chess Play</p>
+		<p>Game ID: {currentState.gameId}</p>
+
+		<!-- Chess Board to Play -->
+		<section class="grid md:grid-cols-3 items-center justify-center gap-4">
+			<!-- First Section -->
+			<section>&nbsp;</section>
+			<!-- Second Section & Third Section -->
+			<ChessboardPlaceholder fen={currentState.fen} client:only="react" />
+		</section>
+	</section>
+</BaseLayout>
