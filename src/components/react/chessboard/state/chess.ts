@@ -8,7 +8,6 @@ interface ChessState {
 	fen: string;
 	pgn: string;
 
-	newGame: (fen: string) => void;
 	setGame: (game: Chess) => void;
 	setFen: (fen: string) => void;
 	setPgn: (pgn: string) => void;
@@ -30,13 +29,6 @@ const useChessStore = create<ChessState>()((set) => ({
 		1. b4 c6 2. b5 c5 3. e3 d6 4. f3 Bg4
 	`
 	*/
-
-	newGame: (fen: string) => {
-		set((state) => ({
-			...state,
-			game: new ChessLogic(fen),
-		}));
-	},
 
 	setGame: (game) => {
 		set((state) => ({ ...state, game }));
