@@ -14,11 +14,15 @@ const currentState = newGame();
 		<p>Game ID: {currentState.gameId}</p>
 
 		<!-- Chess Board to Play -->
-		<section class="grid md:grid-cols-3 items-center justify-center gap-4">
-			<!-- First Section -->
-			<section>&nbsp;</section>
+		<section
+			class="p-4 grid grid-cols-1 lg:grid-cols-2 items-center justify-center gap-4"
+		>
 			<!-- Second Section & Third Section -->
-			<ChessboardPlaceholder fen={currentState.fen} client:only="react" />
+			<ChessboardPlaceholder
+				fen={currentState.fen}
+				pgn={currentState.pgn}
+				client:only="react"
+			/>
 		</section>
 	</section>
 </BaseLayout>

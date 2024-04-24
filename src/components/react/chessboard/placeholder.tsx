@@ -5,18 +5,20 @@ import useChessStore from "./state/chess";
 
 type Props = {
 	fen: string;
+	pgn: string;
 } & PropsWithChildren;
 
-const ChessboardPlaceholder = ({ fen }: Props) => {
-	const { game, pgn, setPgn } = useChessStore((state) => state);
+// biome-ignore lint/correctness/noEmptyPattern: <explanation>
+const ChessboardPlaceholder = ({}: Props) => {
+	const { game, pgn } = useChessStore((state) => state);
 
-	game.header("White", "Si A", "Black", "Si B");
 	game.loadPgn(pgn);
+	game.header("White", "Si A", "Black", "Si B");
 
 	return (
 		<>
-			<ChessboardChess game={game} fen={fen} setPgn={setPgn} />
-			<MovementLogs pgn={pgn} />
+			<ChessboardChess />
+			<MovementLogs />
 		</>
 	);
 };

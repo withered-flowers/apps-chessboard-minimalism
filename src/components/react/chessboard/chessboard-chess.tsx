@@ -1,15 +1,14 @@
-import type { Chess, Square } from "chess.js";
+import type { Square } from "chess.js";
 import Chessboard from "chessboardjsx";
-import { useState } from "react";
+import useChessStore from "./state/chess";
 
-type Props = {
-	game: Chess;
-	fen: string;
-	setPgn: (pgn: string) => void;
-};
+const ChessboardChess = () => {
+	const { game, fen, setFen, setPgn } = useChessStore((state) => state);
 
-const ChessboardChess = ({ game, fen, setPgn }: Props) => {
-	const [currentFen, setCurrentFen] = useState<string>(fen);
+	const whichColorMove = () => {
+		const fenArr = fen.split(" ");
+		return !game.isGameOver() ? (fenArr[1] === "w" ? "White" : "Black") : "-";
+	};
 
 	const onDrop = ({
 		sourceSquare,
@@ -24,7 +23,7 @@ const ChessboardChess = ({ game, fen, setPgn }: Props) => {
 				});
 
 				return new Promise<void>((resolve) => {
-					setCurrentFen(game.fen());
+					setFen(game.fen());
 					setPgn(game.pgn());
 
 					resolve();
@@ -38,7 +37,26 @@ const ChessboardChess = ({ game, fen, setPgn }: Props) => {
 		}
 	};
 
-	return <Chessboard position={currentFen} onDrop={onDrop} />;
+	return (
+		<section>
+			<div className="flex justify-between">
+				<p className="font-semibold">Turn: {whichColorMove()}</p>
+				<section className="flex gap-2">
+					{game.isCheck() && (
+						<span className="font-semibold text-amber-500/80 animate-pulse">
+							Check
+						</span>
+					)}
+					{game.isCheckmate() && (
+						<span className="font-semibold text-red-400/80 animate-pulse">
+							Checkmate
+						</span>
+					)}
+				</section>
+			</div>
+			<Chessboard position={fen} onDrop={onDrop} />
+		</section>
+	);
 };
 
 export default ChessboardChess;
