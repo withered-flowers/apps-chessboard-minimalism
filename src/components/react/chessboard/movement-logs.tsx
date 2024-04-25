@@ -1,24 +1,8 @@
 import useChessStore from "./state/chess";
+import { whichColor, whichPiece } from "./utils/chess";
 
 const MovementLogs = () => {
 	const { game } = useChessStore((state) => state);
-
-	// TODO: Import from utils/chess.ts
-	const whichColor = (color: string) => (color === "w" ? "White" : "Black");
-
-	// TODO: Import from utils/chess.ts
-	const whichPiece = (piece: string) => {
-		let returnedString = "";
-
-		if (piece.toLowerCase() === "p") returnedString = "Pawn";
-		else if (piece.toLowerCase() === "n") returnedString = "Knight";
-		else if (piece.toLowerCase() === "b") returnedString = "Bishop";
-		else if (piece.toLowerCase() === "r") returnedString = "Rook";
-		else if (piece.toLowerCase() === "q") returnedString = "Queen";
-		else if (piece.toLowerCase() === "k") returnedString = "King";
-
-		return returnedString;
-	};
 
 	return (
 		<section className="flex flex-col h-[560px] items-center justify-start overflow-y-auto">

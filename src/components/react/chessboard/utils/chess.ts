@@ -19,3 +19,19 @@ export const whichColorWins = (game: Chess) => {
 
 	return "Black";
 };
+
+export const whichColor = (color: string) =>
+	color === "w" ? "White" : "Black";
+
+export const whichPiece = (piece: string) => {
+	let returnedString = "";
+
+	if (piece.toLowerCase() === "p") returnedString = "Pawn";
+	else if (piece.toLowerCase() === "n") returnedString = "Knight";
+	else if (piece.toLowerCase() === "b") returnedString = "Bishop";
+	else if (piece.toLowerCase() === "r") returnedString = "Rook";
+	else if (piece.toLowerCase() === "q") returnedString = "Queen";
+	else if (piece.toLowerCase() === "k") returnedString = "King";
+
+	return returnedString;
+};

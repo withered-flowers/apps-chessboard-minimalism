@@ -1,31 +1,10 @@
 import type { Square } from "chess.js";
 import Chessboard from "chessboardjsx";
 import useChessStore from "./state/chess";
+import { whichColorMove, whichColorWins } from "./utils/chess";
 
 const ChessboardChess = () => {
 	const { game, fen, setFen, setPgn } = useChessStore((state) => state);
-
-	// TODO: Import from utils/chess.ts
-	const whichColorMove = () => {
-		const fenArr = fen.split(" ");
-		return !game.isGameOver()
-			? fenArr[1] === "w" || fenArr[0] === "start"
-				? "White"
-				: "Black"
-			: "-";
-	};
-
-	// TODO: Import from utils/chess.ts
-	const whichColorWins = () => {
-		const gameHistory = game.history({ verbose: true });
-		const lastMove = gameHistory[gameHistory.length - 1];
-
-		if (lastMove?.color === "w") {
-			return "White";
-		}
-
-		return "Black";
-	};
 
 	const onDrop = ({
 		sourceSquare,
@@ -57,7 +36,7 @@ const ChessboardChess = () => {
 	return (
 		<section>
 			<div className="flex justify-between">
-				<p className="font-semibold">Turn: {whichColorMove()}</p>
+				<p className="font-semibold">Turn: {whichColorMove(game)}</p>
 				<section className="flex gap-2">
 					{game.isCheck() && !game.isCheckmate() && (
 						<span className="font-semibold text-amber-500/80 animate-pulse">
@@ -70,7 +49,7 @@ const ChessboardChess = () => {
 								Checkmate
 							</span>
 							<span> - </span>
-							<span>{whichColorWins()} Win</span>
+							<span>{whichColorWins(game)} Win</span>
 						</>
 					)}
 				</section>
