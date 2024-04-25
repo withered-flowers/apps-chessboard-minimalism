@@ -9,7 +9,7 @@ type Props = {
 } & PropsWithChildren;
 
 const ChessboardPlaceholder = ({ fen, pgn }: Props) => {
-	const { setFen, game, setPgn } = useChessStore((state) => state);
+	const { game, setFen, setPgn } = useChessStore((state) => state);
 
 	useEffect(() => {
 		setFen(fen);

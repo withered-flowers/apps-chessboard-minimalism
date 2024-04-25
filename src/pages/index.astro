@@ -1,12 +1,12 @@
 ---
 import ChessboardPlaceholder from "../components/react/chessboard/placeholder";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { newGame } from "../logics/chess/index";
+import { newGame } from "../utils/chess";
 
 const currentState = newGame();
 ---
 
-<BaseLayout>
+<BaseLayout title="Chess Play">
 	<section
 		class="min-w-full min-h-dvh flex flex-col gap-4 items-center justify-center bg-slate-50 text-slate-700"
 	>

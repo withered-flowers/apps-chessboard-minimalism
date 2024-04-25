@@ -3,8 +3,10 @@ import useChessStore from "./state/chess";
 const MovementLogs = () => {
 	const { game } = useChessStore((state) => state);
 
+	// TODO: Import from utils/chess.ts
 	const whichColor = (color: string) => (color === "w" ? "White" : "Black");
 
+	// TODO: Import from utils/chess.ts
 	const whichPiece = (piece: string) => {
 		let returnedString = "";
 
@@ -19,7 +21,7 @@ const MovementLogs = () => {
 	};
 
 	return (
-		<section className="flex flex-col h-[560px] items-center justify-start overflow-scroll">
+		<section className="flex flex-col h-[560px] items-center justify-start overflow-y-auto">
 			<p>Move Logs</p>
 
 			<section className="font-mono">
