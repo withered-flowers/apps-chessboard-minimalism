@@ -19,6 +19,7 @@ const currentState = newGame();
 		>
 			<!-- Second Section & Third Section -->
 			<ChessboardPlaceholder
+				gameId={currentState.gameId}
 				fen={currentState.fen}
 				pgn={currentState.pgn}
 				client:only="react"

@@ -9,6 +9,7 @@ interface ChessState {
 	pgn: string;
 
 	setGame: (game: Chess) => void;
+	setGameId: (gameId: string) => void;
 	setFen: (fen: string) => void;
 	setPgn: (pgn: string) => void;
 }
@@ -34,12 +35,23 @@ const useChessStore = create<ChessState>()((set) => ({
 		set((state) => ({ ...state, game }));
 	},
 
+	setGameId: (gameId) => {
+		set((state) => ({ ...state, gameId }));
+	},
+
 	setFen: (fen) => {
 		set((state) => ({ ...state, fen }));
 	},
 
 	setPgn: (pgn) => {
-		set((state) => ({ ...state, pgn }));
+		set((state) => {
+			state.game.loadPgn(pgn);
+
+			return {
+				...state,
+				pgn,
+			};
+		});
 	},
 }));
 
